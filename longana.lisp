@@ -4,12 +4,13 @@
 (let (
         (
             deck 
-            (shuffle (create_deck 0 0) 0)
+            (shuffle (create_deck 0 0))
         )
      )
-    (print_tiles deck)
+    (print_tiles (remove '(1 1) deck :test #'equal))
     (terpri)
-    (print_tiles (draw_hand deck 0 0))
+    ;(print_tiles (draw_hand deck 0 0))
+    (print_tiles deck)
     (terpri)
     (print_tiles (draw_hand deck 0 1))
 )

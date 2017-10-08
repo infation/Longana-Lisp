@@ -17,13 +17,29 @@
           ( t
             (append (create_deck pip1 (+ pip2 1)) (list(list pip1 pip2))) )))
 
-(defun shuffle(deck iteration) 
+(defun shuffle(deck) 
     ;(print_deck deck)
-    (cond ( (< iteration 500)
-            (shuffle (append_at 0 (random 28) deck) (+ iteration 1)))
-
+    (cond ( (= (random 200 (make-random-state t)) 56)
+            (append deck nil))
           ( t 
-             deck)))
+            ( let*(
+                    ( 
+                      pip2
+                      (random 7)
+                    )
+                    (
+                      pip1
+                      (random (+ pip2 1))
+                    )
+                  )  
+              ( shuffle ( cons ( list pip1 pip2)
+                               ( remove (list pip1 pip2) deck :test #'equal)
+                        )
+              )
+             )
+            )
+          )
+)      
 
 (defun draw_hand(deck iteration playerIndex)
     (cond ( (= iteration 8)
