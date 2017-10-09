@@ -62,7 +62,7 @@
 
 (defun print_tiles(vector)
     (cond ( (null vector)
-            )
+            )   
           ( t
             (print_tile (first vector))
             (princ " ")

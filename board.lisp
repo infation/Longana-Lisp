@@ -1,0 +1,22 @@
+(load "tile.lisp")
+
+(defun add_to_board(element vector side)
+    (cond 
+          ( (or (equal side "L") (null vector))
+            (terpri)
+            (terpri)
+            (terpri)
+            (princ "                       L ")
+            (print_tiles (cons element vector))
+            (princ "R")
+            (terpri)(terpri)(terpri)
+            (cons element vector))
+          ( (equal side "R")
+            (princ "                       L ")
+            (print_tiles (cons vector (list element)))
+            (princ "R")
+            (terpri)(terpri)(terpri)
+             (cons vector (list element)))
+          ( t
+            ))
+)
