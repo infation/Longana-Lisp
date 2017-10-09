@@ -1,12 +1,28 @@
 (load "board.lisp")
 
-(defun play(hand board)
+(defun print_hand(human_hand)
+    (princ "Human Hand: ")
+    (print_tiles human_hand)
+    (terpri)
+)
+
+(defun play(hand board (print_hand hand))
     (cond ( (null hand) )
           ( t
-            (readnum (length hand))
-            (play (remove (first hand) hand :test #'equal)
-                   (add_to_board (first hand) board "L"))
-          )
+            ( let* ( 
+                    (
+                        tileToPlay
+                        (get_at (- (readnum (length hand)) 1) hand)
+                    )
+                    (
+                        hand
+                        (remove tileToPlay hand :test #'equal)
+                    )
+            )
+                (play hand
+                    (add_to_board tileToPlay board "L") (print_hand hand))
+            )
+        )
     )
     ;(readnum (size hand))
 )
@@ -51,15 +67,8 @@
     ;(print_tiles (remove '(1 1) deck :test #'equal))
     ;(terpri)
     ;(print_tiles (draw_hand deck 0 0))
-    (princ "Deck: ")
-    (print_tiles deck)
-    (terpri)
-    (princ "Human Hand: ")
-    (print_tiles human_hand)
-    (terpri)
-    (princ "Computer Hand: ")
-    (print_tiles computer_hand)
-    (terpri)
-    (play human_hand board)
+
+
+    (play human_hand board (print_hand human_hand))
 )
 ;(print (list 1 2 3))

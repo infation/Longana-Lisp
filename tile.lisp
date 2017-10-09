@@ -41,6 +41,15 @@
           )
 )      
 
+(defun get_at(pos vector)
+    (cond ((= pos 0)
+        (first vector))
+    (t
+        ( get_at (- pos 1) (rest vector))
+    )
+    )
+)
+
 (defun remove_tiles(numElements vector)
     (cond ( (= numElements 0)
            vector)
