@@ -15,6 +15,9 @@
     
         (cond 
             ( (null hand) )
+            ( (not (check_available_moves board hand))
+                
+            )
             ( (not (check_left_rules tileToPlay board))
                 (play hand board (print_hand hand)))
             ( t

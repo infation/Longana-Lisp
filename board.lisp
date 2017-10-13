@@ -22,10 +22,25 @@
 
 (defun check_left_rules(element vector)
     (cond
-        ( ( or (null vector) (equal (first (rest element)) (first (first vector)) )) 
+        ( ( or (null vector) 
+          (equal (first (rest element)) (first (first vector)) )
+          (equal (first element) (first(first vector)) )) 
           t)
         (t 
           nil
         ))
 
+)
+
+(defun check_available_moves(board hand)
+    (cond
+        ( (null hand)
+          (princ "No available moves")
+          nil )
+        ( (check_left_rules (first hand) board)
+          t)
+        (t 
+          (check_available_moves board (rest hand)))
+    
+    )
 )
