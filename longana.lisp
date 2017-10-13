@@ -7,24 +7,23 @@
 )
 
 (defun play(hand board (print_hand hand))
-    (cond ( (null hand) )
-          ( t
-            ( let* ( 
-                    (
-                        tileToPlay
-                        (get_at (- (readnum (length hand)) 1) hand)
-                    )
-                    (
-                        hand
-                        (remove tileToPlay hand :test #'equal)
-                    )
-            )
-                (play hand
-                    (add_to_board tileToPlay board "L") (print_hand hand))
+    ( let* ( 
+            (
+                tileToPlay
+                (get_at (- (readnum (length hand)) 1) hand)
+            ))
+    
+        (cond 
+            ( (null hand) )
+            ( (not (check_left_rules tileToPlay board))
+                (play hand board (print_hand hand)))
+            ( t
+                
+                    (play (remove tileToPlay hand :test #'equal)
+                        (add_to_board tileToPlay board "L") (print_hand (remove tileToPlay hand :test #'equal)))
             )
         )
     )
-    ;(readnum (size hand))
 )
 
 (defun readnum (size)
